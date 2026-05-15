@@ -197,6 +197,12 @@ jobs:
         mv -n libneeds ${GITHUB_WORKSPACE}/android-recovery/out/target/product/${{ inputs.DEVICE_NAME }}/recovery/root/
         mv -n ldcheck ${GITHUB_WORKSPACE}/android-recovery/out/target/product/${{ inputs.DEVICE_NAME }}/recovery/root/
         cd ../android-recovery/out/target/product/${{ inputs.DEVICE_NAME }}/recovery/root
+
+- name: Upload Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: TWRP_Build_${{ inputs.DEVICE_NAME }}
+        path: android-recovery/out/target/product/${{ inputs.DEVICE_NAME }}/vendor_boot.img
         python3 ldcheck -p system/lib64:vendor/lib64:system/lib:vendor/lib -d ${{ inputs.LDCHECK }}
         echo "Done checking missing dependencies. Review, and reconfigure your tree."
       continue-on-error: true
