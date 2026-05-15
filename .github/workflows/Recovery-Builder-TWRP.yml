@@ -180,10 +180,10 @@ jobs:
 - name: Upload to Release (if vendor_boot)
       if: inputs.BUILD_TARGET == 'vendorboot'
       uses: softprops/action-gh-release@v2
-      with:
+with:
         files: |
-          android-recovery/out/target/product/${{ inputs.DEVICE_NAME }}/vendor_boot.img
-          android-recovery/out/target/product/${{ inputs.DEVICE_NAME }}/vendor_boot.tar
+          android-recovery/out/target/product/**/vendor_boot.img
+          android-recovery/out/target/product/**/vendor_boot.tar
         name: Unofficial TWRP for ${{ inputs.DEVICE_NAME }} // ${{ env.BUILD_DATE }}
         tag_name: ${{ github.run_id }}
         body: |
