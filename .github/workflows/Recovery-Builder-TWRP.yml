@@ -177,12 +177,13 @@ jobs:
           Device: [Device Tree/Branch](${{ inputs.DEVICE_TREE }}/tree/${{ inputs.DEVICE_TREE_BRANCH }})
           Commit: Most recent [commit](${{ inputs.DEVICE_TREE }}/commit/${{ env.COMMIT_ID }}) during building.
 
-    - name: Upload to Release (if vendor_boot)
+- name: Upload to Release (if vendor_boot)
       if: inputs.BUILD_TARGET == 'vendorboot'
       uses: softprops/action-gh-release@v2
       with:
         files: |
-          android-recovery/out/target/product/${{ inputs.DEVICE_NAME }}/vendor_boot.*
+          android-recovery/out/target/product/${{ inputs.DEVICE_NAME }}/vendor_boot.img
+          android-recovery/out/target/product/${{ inputs.DEVICE_NAME }}/vendor_boot.tar
         name: Unofficial TWRP for ${{ inputs.DEVICE_NAME }} // ${{ env.BUILD_DATE }}
         tag_name: ${{ github.run_id }}
         body: |
